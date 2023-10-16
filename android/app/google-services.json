@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1045897444226",
+    "firebase_url": "https://prisha-5ee69-default-rtdb.firebaseio.com",
+    "project_id": "prisha-5ee69",
+    "storage_bucket": "prisha-5ee69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045897444226:android:f1a809ba83f076cc422d9b",
+        "android_client_info": {
+          "package_name": "com.example.prishatheexplorer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5U7TToaTv8hmsf3edNDC-mOHEL8c-36M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

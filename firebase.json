@@ -1,0 +1,12 @@
+      "firestore": [
+        {
+          "database": "default",
+          "rules": "firestore.default.rules",
+          "indexes": "firestore.default.indexes.json"
+        },
+        {
+          "database": "ecommerce",
+          "rules": "firestore.ecommerce.rules",
+          "indexes": "firestore.ecommerce.indexes.json"
+        }
+      ],
