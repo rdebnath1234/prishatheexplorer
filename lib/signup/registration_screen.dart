@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'firebase_services.dart';
-import 'login_screen.dart';
-import 'constants.dart';
-import 'drop_down.dart';
+import '../services/firebase_services.dart';
+import '../signin/login_screen.dart';
+import '../colorpallete/constants.dart';
+import '../customizetool/drop_down.dart';
 
 bool _passwordVisible = false;
 bool isFormValid = false;

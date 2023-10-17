@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../colorpallete/constants.dart';
 
 class RoundedSocialButton extends StatelessWidget {
   final String imagePath;

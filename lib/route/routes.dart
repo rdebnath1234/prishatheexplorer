@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:prishatheexplorer/video_player.dart';
-import 'home_screen.dart';
-import 'login_screen.dart';
-import 'profile_screen.dart';
-import 'registration_screen.dart';
+import 'package:prishatheexplorer/Models/video_player.dart';
+import '../Models/home_screen.dart';
+import '../signin/login_screen.dart';
+import '../Models/profile_screen.dart';
+import '../signup/registration_screen.dart';
 
 Map<String, WidgetBuilder> routes = {
   //all screens will be registered here like menifest in android

@@ -33,7 +33,7 @@ class AuthService{
       print('Error signing in with Google: $e');
     }
   }
-  // Log Out
+  // Google Log Out
   Future<void> signOut() async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
@@ -51,33 +51,4 @@ class AuthService{
       print('Error signing out: $e');
     }
   }
-  //PTE registration
-  Future<void> registerWithEmailAndPassword(String email, String password) async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      // Check if a callback is provided, and if so, execute it
-      if (onRegisterSuccess != null) {
-        onRegisterSuccess!();
-      }
-    } catch (e) {
-      // Handle any errors
-      print('$e');
-    }
   }
-  //PTE login
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } catch (e) {
-      // Handle any errors
-      print('$e');
-    }
-  }
-
-}

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'home_screen.dart';
-import 'auth_services.dart';
+import '../services/auth_services.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../colorpallete/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = 'ProfileScreen';
