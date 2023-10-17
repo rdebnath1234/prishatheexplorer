@@ -1,30 +1,67 @@
 import 'package:flutter/material.dart';
+import 'firebase_services.dart';
 import 'login_screen.dart';
 import 'constants.dart';
-import 'auth_services.dart';
+import 'drop_down.dart';
 
 bool _passwordVisible = false;
-
+bool isFormValid = false;
+String gender='Male';
 class RegistrationScreen extends StatefulWidget {
   static String routeName = 'RegistrationScreen';
-
   const RegistrationScreen({super.key});
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
-
 class _RegistrationScreenState extends State<RegistrationScreen> {
   //validate our form now
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  void _register() {
+  void _register() async {
+    setState(() {
+      isFormValid = true; // Start loading
+    });
+    String name = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
+    print(name);
+    print(email);
+    print(password);
+    print(gender);
     // Call your registration function here
-    AuthService().registerWithEmailAndPassword(email, password);
+    if (isFormValid) {
+      Services().addInitialDetails(
+        name,
+        email,
+        password,
+        gender,
+      );
+    }
   }
-
+  buildUserNameField() {
+    return TextFormField(
+        controller: _usernameController,
+        textAlign: TextAlign.start,
+        keyboardType: TextInputType.name,
+        style: const TextStyle(
+            color: kTextBlackColor,
+            fontSize: 17.0,
+            fontWeight: FontWeight.w300),
+        decoration: const InputDecoration(
+          labelText: 'Name',
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          isDense: true,
+        ),
+        validator: (value) {
+          //for validation
+          if (value == null || value.isEmpty) {
+            return 'Please enter some text';
+          }
+          return null;
+        });
+  }
   buildEmailField() {
     return TextFormField(
       controller: _emailController,
@@ -48,10 +85,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           //it not contains @
         }
         return null;
-      },
-    );
+      });
   }
-
   buildPasswordField() {
     return TextFormField(
       controller: _passwordController,
@@ -81,20 +116,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           return 'Must be more than 5 characters';
         }
         return null;
-      },
+      });
+  }
+  buildGendarField() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5.0),
+        border: Border.all(
+          color: kContainerColor, // Define border color here
+        ),
+      ),
+      child: AppDropdownInput(
+        //hintText: "Gender",
+        options: const ["Male", "Female"],
+        value: gender,
+        onChanged: (String? value) {
+          setState(() {
+            gender = value.toString();
+            // state.didChange(newValue);
+          });
+        },
+        getLabel: (String value) => value,
+      ),
     );
   }
-
   @override
   void initState() {
     super.initState();
     //TODO : implement initState
     _passwordVisible = true;
   }
-
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(
+    final ButtonStyle style = FilledButton.styleFrom(
         textStyle: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.bold,
@@ -177,31 +231,30 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          TextFormField(
-                            textAlign: TextAlign.start,
-                            keyboardType: TextInputType.name,
-                            style: const TextStyle(
-                                color: kTextBlackColor,
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.w300),
-                            decoration: const InputDecoration(
-                              labelText: 'Name',
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              isDense: true,
-                            ),
-                          ), //username
-                          buildEmailField(),
+                          buildUserNameField(), //username
+                          buildEmailField(), //emailid
                           buildPasswordField(), //password
-                          ElevatedButton(
+                          buildGendarField(), //Gender
+                          sizedBox,
+                          FilledButton(
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                _register();
-                              }
-                            },
-                            child: const Text('Register'),
+                                    if (_formKey.currentState!.validate()) {
+                                      _register();
+                                    }
+                                  }, // Disable button when form is invalid
                             style: style,
+                            child: const Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Register"),
+                                      Icon(
+                                        Icons.keyboard_arrow_right_rounded,
+                                      ),
+                                    ],
+                                  ),
                           ),
+                          sizedBox,
                           InkWell(
                             onTap: () {
                               Navigator.push(

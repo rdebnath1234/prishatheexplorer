@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart';
 import 'profile_screen.dart';
 import 'constants.dart';
 import 'registration_screen.dart';
 import 'auth_services.dart';
 import 'custom_buttons.dart';
-
 bool _passwordVisible = false;
-
 class LoginScreen extends StatefulWidget {
   static String routeName = 'LoginScreen';
   const LoginScreen({super.key});
@@ -33,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
       AuthService().signInWithEmailAndPassword(email, password);
     }
   }
-
   buildEmailField() {
     return TextFormField(
       controller: _emailController,
@@ -60,7 +58,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-
   buildPasswordField() {
     return TextFormField(
       controller: _passwordController,
@@ -93,7 +90,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-
   @override
   void initState() {
     super.initState();
@@ -115,6 +111,19 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         body: ListView(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, HomeScreen.routeName);
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.arrow_back_ios),
+                  ],
+                ),
+              ),
+            ),
             //divide the body into two half
             Container(
               //use media query in order to fit all screen sizes in same manner
