@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:prishatheexplorer/Models/video_player.dart';
+import 'package:flutter/material.dart';
 import '../Models/home_screen.dart';
 import '../signin/login_screen.dart';
 import '../Models/profile_screen.dart';
@@ -10,6 +9,5 @@ Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => HomeScreen(isLoggedIn: false),
   LoginScreen.routeName: (context) => const LoginScreen(),
   RegistrationScreen.routeName: (context) => const RegistrationScreen(),
-  ProfileScreen.routeName: (context) => ProfileScreen(isLoggedIn: true, profilePictureUrl: '', userName: '', userEmail: '', subscriptionTier: '',),
-  VideoScreen.routeName: (context) => const VideoScreen(),
-};
+  ProfileScreen.routeName: (context) => ProfileScreen(isLoggedIn: true),
+  };

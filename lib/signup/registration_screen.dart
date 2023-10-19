@@ -26,18 +26,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     String name = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
-    print(name);
-    print(email);
-    print(password);
-    print(gender);
     // Call your registration function here
     if (isFormValid) {
-      Services().addInitialDetails(
-        name,
-        email,
-        password,
-        gender,
-      );
+        AuthProvider().registerUserWithEmailAndPassword(
+            name,email,password,gender);
     }
   }
   buildUserNameField() {

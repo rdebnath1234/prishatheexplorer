@@ -3,25 +3,18 @@ import 'home_screen.dart';
 import '../services/auth_services.dart';
 import 'package:flutter/material.dart';
 import '../colorpallete/constants.dart';
+late final String profilePictureUrl;
+late final String userName; // User's name
+late final String userEmail; // User's email
+late final String subscriptionTier; // User's subscription tier (Paid or Free)
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = 'ProfileScreen';
   final bool isLoggedIn;
-  final String profilePictureUrl;
-  final String userName; // User's name
-  final String userEmail; // User's email
-  final String subscriptionTier; // User's subscription tier (Paid or Free)
-  const ProfileScreen(
-      {super.key,
-      required this.profilePictureUrl,
-      required this.userName,
-      required this.userEmail,
-      required this.subscriptionTier,
-      required this.isLoggedIn});
+  const ProfileScreen({super.key, required this.isLoggedIn});
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
-
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
@@ -37,8 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        leading: Image.asset(
-          'assets/images/PTE_logo.png',
+        leading: Image.asset('assets/images/PTE_logo.png',
           height: 40.0,
         ),
         actions: [
@@ -54,8 +46,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
       body: ListView(
-        children: [
-          const Padding(
+        children: const [
+          Padding(
             padding: EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -77,57 +69,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
+          Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text(
+                Text(
                   'User Dashboard',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                kHalfWidthSizedBox,
-                const Text(
-                  'Recommendations',
+                Text(
+                  'Recommendations:',
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 // Add a list of Contents
-                const Text(
+                Text(
                   'Progress Tracking',
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Navigate to Paid Content
-                      },
-                      child: const Text('Paid Content'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Navigate to Free Content
-                      },
-                      child: const Text('Free Content'),
-                    ),
-                  ],
-                ),
-                // Add progress tracking information here
+                ), // Add progress tracking information here
               ],
             ),
           ),
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FilledButton(
+                onPressed: () {
+                  // Navigate to Paid Content
+                },
+                child: const Text('Paid'),
+              ),
+              FilledButton(
+                onPressed: () {
+                  // Navigate to Free Content
+                },
+                child: const Text('Free'),
+              ),
+            ],
+          ),
+        ),
     );
   }
 }
